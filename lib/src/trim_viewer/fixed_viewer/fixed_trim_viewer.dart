@@ -301,23 +301,23 @@ class _FixedTrimViewerState extends State<FixedTrimViewer>
             audioPlayerController.state == PlayerState.playing;
 
         if (isPlaying) {
-          setState(() {
-            _currentPosition = event.inMilliseconds;
+          // setState(() {
+          _currentPosition = event.inMilliseconds;
 
-            if (_currentPosition > _audioEndPos.toInt()) {
-              audioPlayerController.pause();
-              widget.onChangePlaybackState!(false);
+          if (_currentPosition > _audioEndPos.toInt()) {
+            audioPlayerController.pause();
+            widget.onChangePlaybackState!(false);
 
-              if (!_isAnimationControllerDispose) {
-                _animationController?.stop();
-              }
-            } else {
-              if (!_animationController!.isAnimating) {
-                widget.onChangePlaybackState!(true);
-                _animationController!.forward();
-              }
+            if (!_isAnimationControllerDispose) {
+              _animationController?.stop();
             }
-          });
+          } else {
+            if (!_animationController!.isAnimating) {
+              widget.onChangePlaybackState!(true);
+              _animationController!.forward();
+            }
+          }
+          // });
         }
       });
       // audioPlayerController.addListener(() async {
